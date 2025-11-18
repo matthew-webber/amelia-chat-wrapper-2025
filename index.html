@@ -523,7 +523,9 @@ Note: (11/18/25 - 12:30PM) Pre-launch, Jesse requested to update the chat widget
         var openIconSrc = document.querySelector(
           '.chat-overlay-header .chat-overlay-open'
         )
-        openIconSrc.src = this.openCloseContainer.openIconSrc
+        if (openIconSrc) {
+          openIconSrc.src = this.openCloseContainer.openIconSrc
+        }
       }
       if (this.openOnLoad) {
         chatOverlayDefaultStateOpen = true
