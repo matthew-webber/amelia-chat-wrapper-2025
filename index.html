@@ -595,7 +595,6 @@ Note: (11/18/25 - 12:30PM) Pre-launch, Jesse requested to update the chat widget
       .classList.add('chat-overlay-close')
     if (imgElemClose) imgElemClose.style.opacity = 1
     if (imgElemOpen) imgElemOpen.style.opacity = 0
-    localStorage.setItem('chatOverlayOpen', true)
   }
 
   function closeChatOverlay(receiverElem, imgElemOpen, imgElemClose) {
@@ -615,7 +614,6 @@ Note: (11/18/25 - 12:30PM) Pre-launch, Jesse requested to update the chat widget
       .classList.remove('chat-overlay-close')
     if (imgElemOpen) imgElemOpen.style.opacity = 1
     if (imgElemClose) imgElemClose.style.opacity = 0
-    localStorage.setItem('chatOverlayOpen', false)
   }
 
   function toggleChatOverlay() {
@@ -675,38 +673,6 @@ Note: (11/18/25 - 12:30PM) Pre-launch, Jesse requested to update the chat widget
     button.addEventListener('click', refreshConversation)
   })
 
-  if (typeof Storage !== 'undefined') {
-    var chatOverlayOpen = localStorage.getItem('chatOverlayOpen')
-    var chatOverlayHeaderImgElemOpen = document.getElementsByClassName(
-      'chat-overlay-header-img chat-overlay-open'
-    )[0]
-    var chatOverlayHeaderImgElemClose = document.getElementsByClassName(
-      'chat-overlay-header-img chat-overlay-close'
-    )[0]
-    var receiverElem = document.getElementById('receiver')
-    if (
-      chatOverlayOpen &&
-      localStorage.getItem('chatOverlayOpen') === 'false'
-    ) {
-      closeChatOverlay(
-        receiverElem,
-        chatOverlayHeaderImgElemOpen,
-        chatOverlayHeaderImgElemClose
-      )
-    } else if (
-      (chatOverlayOpen && localStorage.getItem('chatOverlayOpen') === 'true') ||
-      chatOverlayDefaultStateOpen
-    ) {
-      openChatOverlay(
-        receiverElem,
-        chatOverlayHeaderImgElemOpen,
-        chatOverlayHeaderImgElemClose
-      )
-    }
-  } else {
-    // Sorry! No Web Storage support..
-    console.warn('No localStorage support')
-  }
   //START of Chat Overlay drag and drop
   var dragItem = document.querySelector('.chat-overlay')
   var touchItem = document.querySelector('.chat-overlay-header')
