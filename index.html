@@ -475,6 +475,7 @@ Note: (11/18/25 - 12:30PM) Pre-launch, Jesse requested to update the chat widget
 <script>
   var isInit = false
   var chatOverlayDefaultStateOpen = false
+  var outsideClickHandler = null
 
   class Config {
     constructor(config) {
@@ -600,6 +601,7 @@ Note: (11/18/25 - 12:30PM) Pre-launch, Jesse requested to update the chat widget
       .classList.add('chat-overlay-close')
     if (imgElemClose) imgElemClose.style.opacity = 1
     if (imgElemOpen) imgElemOpen.style.opacity = 0
+    addOutsideClickListener()
   }
 
   function closeChatOverlay(receiverElem, imgElemOpen, imgElemClose) {
@@ -620,6 +622,35 @@ Note: (11/18/25 - 12:30PM) Pre-launch, Jesse requested to update the chat widget
       .classList.remove('chat-overlay-close')
     if (imgElemOpen) imgElemOpen.style.opacity = 1
     if (imgElemClose) imgElemClose.style.opacity = 0
+    removeOutsideClickListener()
+  }
+
+  function addOutsideClickListener() {
+    if (outsideClickHandler) return
+    outsideClickHandler = function (event) {
+      var wrapper = document.querySelector('.chat-overlay-wrapper')
+      if (!wrapper) return
+      if (!wrapper.contains(event.target)) {
+        closeChatOverlay(
+          document.getElementById('receiver'),
+          document.getElementsByClassName(
+            'chat-overlay-header-img chat-overlay-open'
+          )[0],
+          document.getElementsByClassName(
+            'chat-overlay-header-img chat-overlay-close'
+          )[0]
+        )
+      }
+    }
+    document.addEventListener('mousedown', outsideClickHandler)
+    document.addEventListener('touchstart', outsideClickHandler)
+  }
+
+  function removeOutsideClickListener() {
+    if (!outsideClickHandler) return
+    document.removeEventListener('mousedown', outsideClickHandler)
+    document.removeEventListener('touchstart', outsideClickHandler)
+    outsideClickHandler = null
   }
 
   function toggleChatOverlay() {
