@@ -32,8 +32,10 @@ Note: (11/18/25 - 12:30PM) Pre-launch, Jesse requested to update the chat widget
     right: 24px;
   }
 
-  body.no-scroll {
-    overflow: hidden;
+  @media only screen and (max-width: 768px) {
+    body.no-scroll {
+      overflow: hidden;
+    }
   }
 
   .chat-overlay-closed .header-logo {
@@ -193,7 +195,13 @@ Note: (11/18/25 - 12:30PM) Pre-launch, Jesse requested to update the chat widget
   }
 
   .chat-overlay-open .chat-overlay-wrapper {
-    height: 593px;
+    height: 100%;
+  }
+  
+  @media only screen and (min-width: 769px) {
+    .chat-overlay-open .chat-overlay-wrapper {
+      height: 593px;
+    }
   }
 
   .chat-overlay.chat-overlay-open {
@@ -298,7 +306,6 @@ Note: (11/18/25 - 12:30PM) Pre-launch, Jesse requested to update the chat widget
 
     .chat-overlay-open {
       height: 100%;
-      bottom: -50px;
       right: 0px;
     }
 
@@ -331,6 +338,32 @@ Note: (11/18/25 - 12:30PM) Pre-launch, Jesse requested to update the chat widget
     }
   }
 </style>
+
+<!-- bunch of dummy colored blocks to allow scrolling on body 
+<main>
+  <div
+    style="
+      height: 1500px;
+      background: linear-gradient(to bottom, #ffffff, #cccccc);
+    "
+  >
+    <h1 style="padding: 20px; text-align: center">
+      Welcome to the Sample Page
+    </h1>
+    <p style="padding: 20px; text-align: center">
+      Scroll down to see the chat overlay in action.
+    </p>
+  </div>
+  <div
+    style="
+      height: 500px;
+      background: linear-gradient(to bottom, #cccccc, #ffffff);
+    "
+  >
+    <h2 style="padding: 20px; text-align: center">End of the Sample Page</h2>
+  </div>
+</main>
+-->
 
 <!-- HTML MARKUP -->
 <div class="chat-overlay chat-overlay-closed">
@@ -433,10 +466,9 @@ Note: (11/18/25 - 12:30PM) Pre-launch, Jesse requested to update the chat widget
 <style>
   .chat-bubble-hide-button {
     position: absolute;
-    /* transform: translate(-50%, -50%); */
     bottom: 0;
     right: 0;
-    transform: translateX(50%);
+    transform: translateX(50%); /* will look bad in dev but fine in prod */
     cursor: pointer;
     padding: 0.5rem;
     box-sizing: border-box;
@@ -584,7 +616,7 @@ Note: (11/18/25 - 12:30PM) Pre-launch, Jesse requested to update the chat widget
     if (!isInit) {
       init()
     }
-    document.body.classList.add('no-scroll')
+    document.body.classList.add('no-scroll') // prevent background scrolling on mobile
     document.getElementById('receiver').classList.add('chat-overlay-open')
     document.getElementById('receiver').classList.remove('chat-overlay-close')
     document
@@ -605,7 +637,7 @@ Note: (11/18/25 - 12:30PM) Pre-launch, Jesse requested to update the chat widget
   }
 
   function closeChatOverlay(receiverElem, imgElemOpen, imgElemClose) {
-    document.body.classList.remove('no-scroll')
+    document.body.classList.remove('no-scroll') // prevent background scrolling on mobile
     document.getElementById('receiver').classList.add('chat-overlay-close')
     document.getElementById('receiver').classList.remove('chat-overlay-open')
     document
