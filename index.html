@@ -32,6 +32,10 @@ Note: (11/18/25 - 12:30PM) Pre-launch, Jesse requested to update the chat widget
     right: 24px;
   }
 
+  body.no-scroll {
+    overflow: hidden;
+  }
+
   .chat-overlay-closed .header-logo {
     display: none;
   }
@@ -294,7 +298,7 @@ Note: (11/18/25 - 12:30PM) Pre-launch, Jesse requested to update the chat widget
 
     .chat-overlay-open {
       height: 100%;
-      bottom: 0px;
+      bottom: -50px;
       right: 0px;
     }
 
@@ -579,6 +583,7 @@ Note: (11/18/25 - 12:30PM) Pre-launch, Jesse requested to update the chat widget
     if (!isInit) {
       init()
     }
+    document.body.classList.add('no-scroll')
     document.getElementById('receiver').classList.add('chat-overlay-open')
     document.getElementById('receiver').classList.remove('chat-overlay-close')
     document
@@ -598,6 +603,7 @@ Note: (11/18/25 - 12:30PM) Pre-launch, Jesse requested to update the chat widget
   }
 
   function closeChatOverlay(receiverElem, imgElemOpen, imgElemClose) {
+    document.body.classList.remove('no-scroll')
     document.getElementById('receiver').classList.add('chat-overlay-close')
     document.getElementById('receiver').classList.remove('chat-overlay-open')
     document
