@@ -209,7 +209,12 @@ Note: (11/18/25 - 12:30PM) Pre-launch, Jesse requested to update the chat widget
     border-radius: 25px;
     overflow: hidden;
     height: 675px;
-    max-height: 95vh;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .chat-overlay.chat-overlay-open {
+      max-height: 95lvh;
+    }
   }
 
   .chat-overlay .header-logo {
