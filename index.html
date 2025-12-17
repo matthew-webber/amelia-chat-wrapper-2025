@@ -197,7 +197,7 @@ Note: (11/18/25 - 12:30PM) Pre-launch, Jesse requested to update the chat widget
   .chat-overlay-open .chat-overlay-wrapper {
     height: 100%;
   }
-  
+
   @media only screen and (min-width: 769px) {
     .chat-overlay-open .chat-overlay-wrapper {
       height: 593px;
@@ -660,7 +660,7 @@ Note: (11/18/25 - 12:30PM) Pre-launch, Jesse requested to update the chat widget
   function addOutsideClickListener() {
     if (outsideClickHandler) return
     outsideClickHandler = function (event) {
-      var wrapper = document.querySelector('.chat-overlay-wrapper')
+      var wrapper = document.querySelector('.chat-overlay')
       if (!wrapper) return
       if (!wrapper.contains(event.target)) {
         closeChatOverlay(
